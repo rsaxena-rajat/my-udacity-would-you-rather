@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = (props) => {
     const {usersById, dispatch} = props
-    const classes = useStyles();
+    const classes = useStyles()
     const [selectedUser, setSelectedUser] = useState('')
 
     const handleSelectedUserChange = (event) => setSelectedUser(event.target.value)
@@ -113,7 +113,7 @@ const SignIn = (props) => {
                                         >
                                             {Object.keys(usersById).map(uId => (
                                                 <MenuItem key={uId} value={uId}>
-                                                    <Avatar alt={uId} src={usersById[uId].avatarURL} className={classes.small} />
+                                                    <Avatar alt={uId} src={usersById[uId].avatarURL} />
                                                     <ListItemText primary={usersById[uId].name} />
                                                 </MenuItem>
                                             ))}
@@ -122,7 +122,7 @@ const SignIn = (props) => {
                                         <Button 
                                             variant="contained" 
                                             color="primary"
-                                            disabled={selectedUser === 'None'}
+                                            disabled={selectedUser === ''}
                                             onClick={handleSignInClick}
                                         >
                                             Sign In

@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Avatar from '@material-ui/core/Avatar'
 
+import QuestionsList from './questionslist'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,36 +40,39 @@ const Dashboard = (props) => {
     }
 
     return (
-        <Grid container spacing={0}>
-            <Grid item xs={9}>
-                <Paper square elevation={0}>
-                    <Tabs
-                        value={selectedTab}
-                        indicatorColor="primary"
-                        textColor="primary"
-                        onChange={handleTopNavChange}
-                        aria-label="disabled tabs example"
-                    >
-                        <Tab key="Home" label="Home" />
-                        <Tab key="New Question" label="New Question" />
-                        <Tab key="Leader Board" label="Leader Board" />
-                    </Tabs>
-                </Paper>
-            </Grid>
-            <Grid item xs={3}>
-                <Grid container spacing={0}>
-                    <Grid item xs={1} className={classes.avatarHello}>
-                        <Avatar alt={loggedInUser.name} src={loggedInUser.avatarURL} className={classes.small} />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <p className={classes.helloMessage}>Hello, {loggedInUser.name}</p>
-                    </Grid>
-                    <Grid item xs={5}>
-                        <Button className={classes.logoutBtn} variant="contained" color="inherit">Logout</Button>
+        <div>
+            <Grid container spacing={0}>
+                <Grid item xs={9}>
+                    <Paper square elevation={0}>
+                        <Tabs
+                            value={selectedTab}
+                            indicatorColor="primary"
+                            textColor="primary"
+                            onChange={handleTopNavChange}
+                            aria-label="disabled tabs example"
+                        >
+                            <Tab key="Home" label="Home" />
+                            <Tab key="New Question" label="New Question" />
+                            <Tab key="Leader Board" label="Leader Board" />
+                        </Tabs>
+                    </Paper>
+                </Grid>
+                <Grid item xs={3}>
+                    <Grid container spacing={0}>
+                        <Grid item xs={1} className={classes.avatarHello}>
+                            <Avatar alt={loggedInUser.name} src={loggedInUser.avatarURL} className={classes.small} />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <p className={classes.helloMessage}>Hello, {loggedInUser.name}</p>
+                        </Grid>
+                        <Grid item xs={5}>
+                            <Button className={classes.logoutBtn} variant="contained" color="inherit">Logout</Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
+            <QuestionsList />
+        </div>
     )
 }
 
