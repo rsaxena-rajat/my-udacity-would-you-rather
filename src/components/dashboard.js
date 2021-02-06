@@ -59,6 +59,10 @@ const Dashboard = (props) => {
         setRedirect(tabURIMap[newValue])
     }
 
+    const handleLogout = () => {
+        setRedirect('/signin')
+    }
+
     if (redirect) {
         return (<Redirect to={redirect} />)
     }
@@ -78,7 +82,7 @@ const Dashboard = (props) => {
                             <Tab key="Home" label="Home" />
                             <Tab key="New Question" label="New Question" />
                             <Tab key="Leader Board" label="Leader Board" />
-                            {questionId && (<Tab key={`Question: ${questionId}`} label={`Question: ${questionId}`} />)}
+                            {questionId && (<Tab key={`Question: ${questionId}`} label={'Question'} />)}
                         </Tabs>
                     </Paper>
                 </Grid>
@@ -91,7 +95,14 @@ const Dashboard = (props) => {
                             <p className={classes.helloMessage}>Hello, {loggedInUser.name}</p>
                         </Grid>
                         <Grid item xs={5}>
-                            <Button className={classes.logoutBtn} variant="contained" color="inherit">Logout</Button>
+                            <Button 
+                                className={classes.logoutBtn} 
+                                variant="contained" 
+                                color="inherit"
+                                onClick={handleLogout}
+                            >
+                                Logout
+                            </Button>
                         </Grid>
                     </Grid>
                 </Grid>

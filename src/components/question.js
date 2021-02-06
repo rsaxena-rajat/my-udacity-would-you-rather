@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {makeStyles} from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import Avatar from '@material-ui/core/Avatar'
 import { Button } from '@material-ui/core'
+import { Redirect } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,7 +49,15 @@ const Question = props => {
     const classes = useStyles()
     const {question, askedByUser} = props
 
-    const handleViewPollClick = () => {}
+    const [redirect, setRedirect] = useState(false)
+
+    const handleViewPollClick = () => {
+        setRedirect(true)
+    }
+
+    if (redirect) {
+        return (<Redirect to={`/questions/${question.id}`} />)
+    }
 
     return (
         <Grid item className={classes.root}>

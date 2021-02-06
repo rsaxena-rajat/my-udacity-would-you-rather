@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 import {addQuestion} from '../actions/questions'
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -58,6 +59,8 @@ const AddQuestion = (props) => {
 
     const {dispatch, authedUser} = props
 
+    const [redirect, setRedirect] = useState(null)
+
     const handleOptionChange = (fn) => (event) => fn(event.target.value)
 
     const handleSubmit = () => {
@@ -75,6 +78,11 @@ const AddQuestion = (props) => {
             timestamp: Date.now()
         }
         dispatch(addQuestion(question))
+        setRedirect(`/questions/${question.id}`)
+    }
+
+    if (redirect) {
+        return (<Redirect to={redirect} />)
     }
 
     return (
