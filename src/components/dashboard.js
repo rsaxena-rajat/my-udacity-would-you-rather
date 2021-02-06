@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import Avatar from '@material-ui/core/Avatar'
 
 import QuestionsList from './questionslist'
+import AddQuestion from './addquestion'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,7 +72,8 @@ const Dashboard = (props) => {
                     </Grid>
                 </Grid>
             </Grid>
-            <QuestionsList />
+            {selectedTab === 0 && (<QuestionsList />)}
+            {selectedTab === 1 && (<AddQuestion />)}
         </div>
     )
 }

@@ -27,8 +27,8 @@ const QuestionsList = props => {
     }
     const {questions, loggedInUser, users} = props
 
-    const answeredQues = []
-    const unansweredQues = []
+    let answeredQues = []
+    let unansweredQues = []
     
     Object.keys(questions).forEach(quesId => {
         const ques = questions[quesId]
@@ -38,6 +38,9 @@ const QuestionsList = props => {
             unansweredQues.push(ques)
         }
     })
+
+    answeredQues = answeredQues.sort((b, a) => a.timestamp - b.timestamp)
+    unansweredQues = unansweredQues.sort((b, a) => a.timestamp - b.timestamp)
     
     return (
         <Grid item className={classes.root}>
@@ -74,7 +77,7 @@ const QuestionsList = props => {
 }
 
 function mapStateToProps({questions, authedUser, users}) {
-    console.log({questions})
+    console.log(questions)
     return {
         loggedInUser: users[authedUser],
         questions,
