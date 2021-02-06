@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
 const Question = props => {
     const classes = useStyles()
     const {question, askedByUser} = props
+
+    const handleViewPollClick = () => {}
+
     return (
         <Grid item className={classes.root}>
             <Grid container spacing={0} direction="column" justify="center" alignItems="center">
@@ -70,7 +73,14 @@ const Question = props => {
                                         <li key={`${question.id}-optionOne`} className={classes.optionText}>{question.optionOne.text}</li>
                                         <li key={`${question.id}-optionTwo`} className={classes.optionText}>{question.optionTwo.text}</li>
                                     </ul>
-                                    <Button variant="outlined" color="primary" className={classes.viewPollButton}>View Poll</Button>
+                                    <Button 
+                                        variant="outlined" 
+                                        color="primary" 
+                                        className={classes.viewPollButton}
+                                        onClick={handleViewPollClick}
+                                    >
+                                        View Poll
+                                    </Button>
                                 </Paper>
                             </Grid>
                         </Grid>

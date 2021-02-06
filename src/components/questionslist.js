@@ -77,7 +77,6 @@ const QuestionsList = props => {
 }
 
 function mapStateToProps({questions, authedUser, users}) {
-    console.log(questions)
     return {
         loggedInUser: users[authedUser],
         questions,

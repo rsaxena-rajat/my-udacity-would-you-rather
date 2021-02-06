@@ -10,6 +10,9 @@ import Avatar from '@material-ui/core/Avatar'
 
 import QuestionsList from './questionslist'
 import AddQuestion from './addquestion'
+import LeaderBoard from './leaderboard'
+import QuestionView from './questionview'
+import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,10 +37,30 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = (props) => {
     const classes = useStyles()
-    const [selectedTab, setSelectedTab] = useState(0)
-    const {loggedInUser} = props
+    console.log('Dashboard Props', props)
+    const {loggedInUser, initialTab} = props
+    
+    let selectedTab = initialTab || 0
+    const [redirect, setRedirect] = useState()
+
+    const tabURIMap = {
+        '0': '/',
+        '1': '/add',
+        '2': '/leaderboard'
+    }
+
+    const [questionId, setQuestionId] = useState(props.match.params.questionId)
+    if (questionId) {
+        selectedTab = 3
+    }
+
     const handleTopNavChange = (event, newValue) => {
-        setSelectedTab(newValue)
+        setQuestionId(null)
+        setRedirect(tabURIMap[newValue])
+    }
+
+    if (redirect) {
+        return (<Redirect to={redirect} />)
     }
 
     return (
@@ -55,6 +78,7 @@ const Dashboard = (props) => {
                             <Tab key="Home" label="Home" />
                             <Tab key="New Question" label="New Question" />
                             <Tab key="Leader Board" label="Leader Board" />
+                            {questionId && (<Tab key={`Question: ${questionId}`} label={`Question: ${questionId}`} />)}
                         </Tabs>
                     </Paper>
                 </Grid>
@@ -74,12 +98,15 @@ const Dashboard = (props) => {
             </Grid>
             {selectedTab === 0 && (<QuestionsList />)}
             {selectedTab === 1 && (<AddQuestion />)}
+            {selectedTab === 2 && (<LeaderBoard />)}
+            {selectedTab === 3 && (<QuestionView questionId={questionId} />)}
         </div>
     )
 }
 
-function mapStateToProps({users, authedUser}) {
+function mapStateToProps({users, authedUser}, props) {
     return {
+        ...props,
         loggedInUser: users[authedUser]
     }
 }

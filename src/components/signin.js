@@ -12,6 +12,7 @@ import Avatar from '@material-ui/core/Avatar'
 import ListItemText from '@material-ui/core/ListItemText'
 
 import {setAuthedUser} from '../actions/authedUser'
+import { Redirect } from 'react-router-dom'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -68,13 +69,20 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const SignIn = (props) => {
+    const redirectURI = (new URLSearchParams(props.location.search)).get('redirect_uri') || '/'
     const {usersById, dispatch} = props
     const classes = useStyles()
     const [selectedUser, setSelectedUser] = useState('')
+    const [redirect, setRedirect] = useState()
 
     const handleSelectedUserChange = (event) => setSelectedUser(event.target.value)
     const handleSignInClick = () => {
         dispatch(setAuthedUser(selectedUser))
+        setRedirect(decodeURIComponent(redirectURI))
+    }
+
+    if (redirect) {
+        return (<Redirect to={redirect} />)
     }
 
     return (
