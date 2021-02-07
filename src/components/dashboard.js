@@ -54,6 +54,9 @@ const Dashboard = (props) => {
     }
 
     const handleTopNavChange = (event, newValue) => {
+        if (selectedTab === newValue) {
+            return
+        }
         setQuestionId(null)
         setRedirect(tabURIMap[newValue])
     }
