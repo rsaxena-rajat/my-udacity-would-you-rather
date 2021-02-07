@@ -65,7 +65,7 @@ const AddQuestion = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const question = await dispatch(handleAddQuestion({
+        dispatch(handleAddQuestion({
             optionOneText: option1Text,
             optionTwoText: option2Text,
             author: authedUser
