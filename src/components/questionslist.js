@@ -65,7 +65,7 @@ const QuestionsList = props => {
                     {
                         (selectecTab ? answeredQues : unansweredQues).map(ques => (
                             <Grid key={`questions-list-${ques.id}`} item>
-                                <Question question={ques} askedByUser={users[ques.author]}/>
+                                <Question question={ques} askedByUser={users[ques.author]} category={selectecTab ? 'answered' : 'unanswered'}/>
                             </Grid>
                         ))
                     }

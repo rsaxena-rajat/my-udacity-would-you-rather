@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Question = props => {
     const classes = useStyles()
-    const {question, askedByUser} = props
+    const {question, askedByUser, category} = props
 
     const [redirect, setRedirect] = useState(false)
 
@@ -88,7 +88,7 @@ const Question = props => {
                                         className={classes.viewPollButton}
                                         onClick={handleViewPollClick}
                                     >
-                                        View Poll
+                                        {category === 'unanswered' ? 'Answer and View Poll' : 'View Poll' }
                                     </Button>
                                 </Paper>
                             </Grid>
