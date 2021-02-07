@@ -102,12 +102,12 @@ const QuestionResults = (props) => {
                                                 <Typography className={classes.questionText}>Would you rather {question.optionOne.text} ?</Typography>
                                             </Grid>
                                             <Grid item xs={12}>
-                                                <LinearProgress variant="determinate" value={question.optionOne.votes.length * 100 / totalVotes} style={{marginRight: '10px'}}/>
+                                                <LinearProgress variant="determinate" value={question.optionOne.votes.length * 100 / totalVotes} style={{minHeight: '10px', marginLeft: '10px', marginRight: '10px'}} />
                                             </Grid>
                                             <Grid item xs={12}>
                                                 <Typography className={classes.statsText}>
                                                 {
-                                                    `${question.optionOne.votes.length} out of ${totalVotes} votes${votedByLoggedInUser === 'optionOne' ? ' including you': ''}`
+                                                    `${question.optionOne.votes.length} out of ${totalVotes} votes${votedByLoggedInUser === 'optionOne' ? ' including you': ''} [${Math.round(question.optionOne.votes.length * 1000 / totalVotes) / 10}%]`
                                                 }
                                                 </Typography>
                                             </Grid>
@@ -127,7 +127,7 @@ const QuestionResults = (props) => {
                                             <Grid item xs={12}>
                                                 <Typography className={classes.statsText}>
                                                 {
-                                                    `${question.optionTwo.votes.length} out of ${totalVotes} votes${votedByLoggedInUser === 'optionTwo' ? ' including you': ''}`
+                                                    `${question.optionTwo.votes.length} out of ${totalVotes} votes${votedByLoggedInUser === 'optionTwo' ? ' including you': ''} [${Math.round(question.optionTwo.votes.length * 1000 / totalVotes) / 10}%]`
                                                 }
                                                 </Typography>
                                             </Grid>
