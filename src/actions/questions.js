@@ -10,14 +10,19 @@ export const receiveQuestions = (questions) => ({
 })
 
 export function handleAddQuestion({optionOneText, optionTwoText, author}) {
+    let addedQuestion = null;
     return (dispatch) => {
         dispatch(showLoading())
         return saveQuestion({optionOneText, optionTwoText, author})
-            .then(() => getInitialData())
+            .then((question) => {
+                addedQuestion = question
+                return getInitialData()
+            })
             .then(({users, questions}) => {
                 dispatch(receiveUsers(users))
                 dispatch(receiveQuestions(questions))
                 dispatch(hideLoading())
+                return addedQuestion
             })
     }
 }

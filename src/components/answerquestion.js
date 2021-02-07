@@ -7,6 +7,8 @@ import Avatar from '@material-ui/core/Avatar'
 import {Button, FormControl, FormControlLabel, Radio, RadioGroup} from '@material-ui/core'
 import {Redirect} from 'react-router-dom'
 
+import {handleAddQuestionAnswer} from '../actions/questions'
+
 const useStyles = makeStyles((theme) => ({
     root: {
         paddingTop: '100px'
@@ -54,10 +56,16 @@ const useStyles = makeStyles((theme) => ({
 
 const AnswerQuestion = (props) => {
     const classes = useStyles()
-    const {question, askedByUser} = props
+    const {question, askedByUser, authedUser, dispatch} = props
     const [redirect, setRedirect] = useState(false)
 
-    const handleClick = () => {
+    const handleClick = (e) => {
+        e.preventDefault()
+        dispatch(handleAddQuestionAnswer({
+            authedUser,
+            qid: question.id,
+            answer: selection
+        }))
         setRedirect(true)
     }
 
@@ -113,10 +121,11 @@ const AnswerQuestion = (props) => {
     )
 }
 
-function mapStateToProps({users}, {question}) {
+function mapStateToProps({users, authedUser}, {question}) {
     return {
         question,
-        askedByUser: users[question.author]
+        askedByUser: users[question.author],
+        authedUser
     }
 }
 

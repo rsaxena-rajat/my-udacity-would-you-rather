@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Dashboard = (props) => {
     const classes = useStyles()
-    console.log('Dashboard Props', props)
     const {loggedInUser, initialTab} = props
     
     let selectedTab = initialTab || 0

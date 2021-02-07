@@ -9,8 +9,8 @@ import Paper from '@material-ui/core/Grid'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
-import {addQuestion} from '../actions/questions'
-import { Redirect } from 'react-router-dom';
+import {handleAddQuestion} from '../actions/questions'
+import {Redirect} from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -63,21 +63,13 @@ const AddQuestion = (props) => {
 
     const handleOptionChange = (fn) => (event) => fn(event.target.value)
 
-    const handleSubmit = () => {
-        const question = {
-            id: new Array(20).join().replace(/(.|$)/g, function(){return ((Math.random()*36)|0).toString(36);}),
-            author: authedUser,
-            optionOne: {
-                text: option1Text,
-                votes: []
-            },
-            optionTwo: {
-                text: option2Text,
-                votes: []
-            },
-            timestamp: Date.now()
-        }
-        dispatch(addQuestion(question))
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const question = await dispatch(handleAddQuestion({
+            optionOneText: option1Text,
+            optionTwoText: option2Text,
+            author: authedUser
+        }))
         setRedirect(`/questions/${question.id}`)
     }
 

@@ -9,9 +9,10 @@ const QuestionView = (props) => {
 
     return (
         <div>
-            {loggedInUser.answers[question.id]
+            {!question && (<div style={{textAlign: 'center', marginTop: '100px', fontSize: '200%'}}>404 Error. This question does not exist !!</div>)}
+            {question && (loggedInUser.answers[question.id]
                 ? <QuestionResults question={question} />
-                : <AnswerQuestion question={question} />
+                : <AnswerQuestion question={question} />)
             }
         </div>
     )
