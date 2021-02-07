@@ -59,7 +59,7 @@ const AddQuestion = (props) => {
 
     const {dispatch, authedUser} = props
 
-    const [redirect, setRedirect] = useState(null)
+    const [redirect, setRedirect] = useState(false)
 
     const handleOptionChange = (fn) => (event) => fn(event.target.value)
 
@@ -70,11 +70,11 @@ const AddQuestion = (props) => {
             optionTwoText: option2Text,
             author: authedUser
         }))
-        setRedirect(`/questions/${question.id}`)
+        setRedirect(true)
     }
 
     if (redirect) {
-        return (<Redirect to={redirect} />)
+        return (<Redirect to='/' />)
     }
 
     return (
@@ -138,7 +138,7 @@ const AddQuestion = (props) => {
                                 color="primary" 
                                 className={classes.innerContainer} 
                                 style={{marginBottom: '20px'}} 
-                                disabled={!option1Text || !option2Text}
+                                disabled={!option1Text.trim() || !option2Text.trim()}
                                 onClick={handleSubmit}
                             >
                                 Submit
